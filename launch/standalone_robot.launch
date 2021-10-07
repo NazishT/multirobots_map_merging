@@ -1,0 +1,26 @@
+<!-- xml -->
+<launch>
+
+   <!-- ********** begin robot ********************** /-->
+   <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+
+  
+    
+<!-- ********** laser scanner ********************** /-->
+
+
+   <node pkg="urg_node" type="urg_node" name="urg_node" output="screen">
+      <param name="port" value="/dev/ACM0"/>
+      <param name="frame_id" value="laser"/>
+   </node>  
+
+
+   <!-- gmapping -->
+   <include file="$(find turtlebot_navigation)/launch/gmapping_demo.launch"/>
+   <!-- static tf publisher -->
+   <node pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /base_footprint /laser 1000" name="tf_static_trans" />
+
+</launch>
+
+
+
